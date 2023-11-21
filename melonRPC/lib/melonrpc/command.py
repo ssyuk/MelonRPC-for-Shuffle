@@ -16,9 +16,6 @@ melon = f"""\033[38;5;155m
           !!!!!!!!!             
 """
 
-print(f"{melon}")
-rpc = discordrpc.RPC.set_id(app_id=1154790088295841912)
-
 def info(string):
     print(f"\033[38;5;122m[ℹ️] {string}")
 
@@ -61,53 +58,57 @@ def wait_for_window_hwnd():
     success("Found Melon App Player!")
     return result
 
-info("프로젝트 문의 : melon@norhu1130.dev")
-print()
+def entrypoint():
+    print(f"{melon}")
+    rpc = discordrpc.RPC.set_id(app_id=1154790088295841912)
 
-info("카카오엔터테이먼트사의 공식 제품/서비스가 아닙니다.")
-info("멜론 또는 카카오엔터테이먼트사와 승인되지 않았으며, 관련이 없습니다.")
-print()
+    info("프로젝트 문의 : melon@norhu1130.dev")
+    print()
 
-warning("본 프로젝트는 무료로 배포되며, 상업적 이용을 금합니다.")
-warning("본 프로그램을 유료로 구입하셨다면, 연락 부탁드립니다.")
-print()
+    info("카카오엔터테이먼트사의 공식 제품/서비스가 아닙니다.")
+    info("멜론 또는 카카오엔터테이먼트사와 승인되지 않았으며, 관련이 없습니다.")
+    print()
 
-hwnd = wait_for_window_hwnd()
+    warning("본 프로젝트는 무료로 배포되며, 상업적 이용을 금합니다.")
+    warning("본 프로그램을 유료로 구입하셨다면, 연락 부탁드립니다.")
+    print()
 
-cache = None
+    hwnd = wait_for_window_hwnd()
 
-while True:
-    title = win32gui.GetWindowText(hwnd)
+    cache = None
 
-    if title == cache:
-        continue
+    while True:
+        title = win32gui.GetWindowText(hwnd)
 
-    cache = title
+        if title == cache:
+            continue
 
-    if title == "멜론 PC 플레이어":
-        rpc.set_activity(
-            state=f"노래를 고르는 중 . . .",
-            details="",
-            large_image="melon",
-            large_text="멜론 PC 플레이어",
-            timestamp=time.mktime(time.localtime())
-        )
-        continue
+        cache = title
 
-    split = title.split(" - ")
+        if title == "멜론 PC 플레이어":
+            rpc.set_activity(
+                state=f"노래를 고르는 중 . . .",
+                details="",
+                large_image="melon",
+                large_text="멜론 PC 플레이어",
+                timestamp=time.mktime(time.localtime())
+            )
+            continue
 
-    try:
-        song = " - ".join(split[:-1])
-        artist = split[-1]
+        split = title.split(" - ")
 
-        info(f"Playing {song} - {artist}")
+        try:
+            song = " - ".join(split[:-1])
+            artist = split[-1]
 
-        rpc.set_activity(
-            state=f"{artist}",
-            details=song,
-            large_image="melon",
-            large_text="멜론 PC 플레이어",
-            timestamp=time.mktime(time.localtime())
-        )
-    except:
-        error("Failed to get song info. Are you closed Melon Player?")
+            info(f"Playing {song} - {artist}")
+
+            rpc.set_activity(
+                state=f"{artist}",
+                details=song,
+                large_image="melon",
+                large_text="멜론 PC 플레이어",
+                timestamp=time.mktime(time.localtime())
+            )
+        except:
+            error("Failed to get song info. Are you closed Melon Player?")

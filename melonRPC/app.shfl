@@ -1,0 +1,21 @@
+{
+  "name": "MelonRPC",
+  "description": "자신이 무엇을 듣는지 뽐내보세요! *Unofficial project",
+  "author": "Syuk",
+  "version": "0.0.1",
+  "api-version": 2,
+  "python-pkgs": [
+    "discord-rpc",
+    "pywin32"
+  ],
+  "commands": [
+    {
+      "name": "melonrpc",
+      "usage": "melonrpc",
+      "description": "Run MelonRPC",
+      "examples": [
+        "melonrpc"
+      ]
+    }
+  ]
+}
