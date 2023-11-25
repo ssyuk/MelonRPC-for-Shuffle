@@ -11,5 +11,5 @@ Spotify는 RPC를 지원하지만, 멜론에서는 RPC를 지원하지 않아요
 # 설치
 ```
 1. appmgr repo add https://raw.githubusercontent.com/ssyuk/shflrepo/main/repo.json
-2. appmgr add melonrpc
+2. appmgr add melonRPC
 ```
